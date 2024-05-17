@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: episode-04-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: episode-04-backend
+  template:
+    metadata:
+      labels:
+        app: episode-04-backend
+    spec:
+      containers:
+        - name: backend
+          image: episode-04-backend:<tag>
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: episode-04-backend-service
+spec:
+  selector:
+    app: episode-04-backend
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP

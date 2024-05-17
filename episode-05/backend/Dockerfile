@@ -1,20 +1,20 @@
-# Use an official Node.js runtime as the base image
-FROM node:14
+# Use a base image with Node.js
+FROM node:14-alpine
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+# Set working directory
+WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
-COPY backend/package*.json ./
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-# Install backend dependencies
+# Install dependencies
 RUN npm install
 
-# Copy the backend source code to the container
-COPY backend/ .
+# Copy source code
+COPY . .
 
-# Expose port 8000 to the outside world
+# Expose port
 EXPOSE 8000
 
-# Command to run the backend application
+# Command to run the backend
 CMD ["npm", "start"]
